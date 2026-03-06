@@ -119,7 +119,7 @@ if prob_cols:
 
 # ── Features de entrada ──────────────────────────────────────────────────────
 st.subheader("Distribuição das Features de Entrada")
-numeric_input_cols = ["INDE_22", "IAA", "IEG", "IPS", "IDA", "IPV", "IAN", "Fase"]
+numeric_input_cols = ["INDE_22", "IAA", "IEG", "IPS", "IPP", "IDA", "IPV", "Fase"]
 available = [c for c in numeric_input_cols if c in df.columns]
 
 if available:
