@@ -14,7 +14,7 @@ A ONG **Passos Mágicos** atende crianças e jovens em situação de vulnerabili
 | 1 | Risco Médio | 1 fase abaixo do esperado |
 | 2 | Alto Risco | 2 ou mais fases abaixo |
 
-**Dataset:** 860 alunos com dados educacionais de 2022 (PEDE 2024 Datathon).
+**Dataset:** 2.593 avaliações de alunos com dados educacionais de 2022, 2023 e 2024 (PEDE 2024 Datathon).
 
 ---
 
@@ -54,10 +54,10 @@ passos-magicos-ml/
 ## Pipeline de Machine Learning
 
 ### 1. Pré-processamento (`src/preprocessing.py`)
-- Carregamento do dataset Excel/CSV
+- Carregamento das 3 planilhas do Excel (PEDE2022, PEDE2023, PEDE2024) com harmonização de colunas
+- Normalização de valores: Fase (strings como `'ALFA'`, `'FASE 3'`, `'3G'` → inteiro), Gênero e Pedra
 - Criação da variável target (3 classes de risco)
-- Seleção das features relevantes
-- **Nota:** `IAN` foi excluído pois é derivado diretamente de `Defas` (data leakage)
+- Seleção das features relevantes (`IAN` excluído por ser derivado direto de `Defas` — data leakage)
 
 ### 2. Engenharia de Features (`src/feature_engineering.py`)
 - `Media_Academica`: média de IAA, IEG e IDA
@@ -75,10 +75,10 @@ passos-magicos-ml/
 
 | Métrica | Valor |
 |---------|-------|
-| F1-Score Macro (CV) | 0.9745 |
-| Acurácia (teste) | 0.9826 |
-| F1-Score Macro (teste) | 0.9841 |
-| F1-Score Weighted (teste) | 0.9825 |
+| F1-Score Macro (CV) | 0.8937 |
+| Acurácia (teste) | 0.9249 |
+| F1-Score Macro (teste) | 0.9122 |
+| F1-Score Weighted (teste) | 0.9250 |
 
 **Justificativa da métrica:** F1-Score Macro foi escolhido por tratar todas as classes igualmente, sendo robusto ao desbalanceamento presente na base (71% dos alunos estão defasados). É a métrica mais adequada para priorizar a detecção correta do Alto Risco.
 
@@ -144,6 +144,7 @@ curl -X POST http://localhost:8000/predict \
     "IAA": 6.0,
     "IEG": 5.0,
     "IPS": 5.5,
+    "IPP": 6.0,
     "IDA": 5.0,
     "IPV": 6.5,
     "Matem": 5.0,
@@ -179,6 +180,7 @@ Resposta:
 | IAA | float [0-10] | Sim | Índice de Auto Avaliação |
 | IEG | float [0-10] | Sim | Índice de Engajamento |
 | IPS | float [0-10] | Sim | Índice Psicossocial |
+| IPP | float [0-10] | Não | Índice Psicossocial Participativo (disponível a partir de 2023) |
 | IDA | float [0-10] | Sim | Índice de Desempenho Acadêmico |
 | IPV | float [0-10] | Sim | Índice de Ponto de Virada |
 | Matem | float [0-10] | Não | Nota de Matemática |
