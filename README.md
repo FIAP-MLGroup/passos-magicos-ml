@@ -93,6 +93,10 @@ passos-magicos-ml/
 ### 1. Treinamento do Modelo (executar uma vez)
 
 ```bash
+# Criar ambiente virtual
+python -m .venv venv
+source .venv/bin/activate
+
 # Instalar dependências
 pip install -r requirements.txt
 
