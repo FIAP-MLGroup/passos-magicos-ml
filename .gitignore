@@ -1,0 +1,29 @@
+# Dados sensíveis — exclui arquivos mas mantém estrutura de pastas
+data/*
+!data/.gitkeep
+*.xlsx
+*.xls
+*.csv
+
+# Ambiente Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+env/
+
+# Logs de runtime
+logs/*.log
+logs/*.jsonl
+
+# Cobertura de testes
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.DS_Store
